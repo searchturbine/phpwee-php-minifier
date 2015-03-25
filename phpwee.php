@@ -9,17 +9,20 @@ require_once("src/JsMin/JsMin.php");
 // -- notes:  aply data-no-min to a style or script node to exempt it
 // -- HTML 4, XHTML, and HTML 5 compliant
 
-class PHPWee{
+
+namespace PHPWee;
+
+class Minify{
 	
-	public static function minifyHTML($html){
+	public static function html($html){
 		return HtmlMin::minify($html);
 	}
 	
-	public static function minifyCSS($css){
+	public static function css($css){
 		return CssMin::minify($css);
 	}
 	
-	public static function minifyJS($js){
+	public static function js($js){
 		return JsMin::minify($js);
 	}
 	
