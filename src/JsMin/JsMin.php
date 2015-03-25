@@ -1,4 +1,5 @@
 <?php
+namespace PHPWee;
 /**
  * JSMin.php - modified PHP implementation of Douglas Crockford's JSMin.
  *
@@ -446,6 +447,6 @@ class JSMin {
     }
 }
 
-class JSMin_UnterminatedStringException extends Exception {}
-class JSMin_UnterminatedCommentException extends Exception {}
-class JSMin_UnterminatedRegExpException extends Exception {}
+class JSMin_UnterminatedStringException extends \Exception {}
+class JSMin_UnterminatedCommentException extends \Exception {}
+class JSMin_UnterminatedRegExpException extends \Exception {}

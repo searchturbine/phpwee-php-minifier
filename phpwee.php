@@ -1,16 +1,21 @@
 <?
+namespace PHPWee;
 require_once("src/CssMin/CssMin.php");
 require_once("src/HtmlMin/HtmlMin.php");
 require_once("src/JsMin/JsMin.php");
  	
-// -- Class Name : HtmlMin
-// -- Purpose : PHP class to minify html code.
-// -- Usage:  echo HtmlMin::minify($myhtml)
-// -- notes:  aply data-no-min to a style or script node to exempt it
-// -- HTML 4, XHTML, and HTML 5 compliant
+
+// Open-source (BSD) PHP inline minifier functions for HTML, XHTML, HTML5, CSS 1-3 and Javascript.   
+// BSD Licensed  - https://github.com/searchturbine/phpwee-php-minifier/blob/master/LICENSE
+// 
+// Usage
+//	$output = 	 \PHPWee\Minify::html($any_html);
+//  $output =     \PHPWee\Minify::css($any_css);
+//  $output =     \PHPWee\Minify::js($any_js);
 
 
-namespace PHPWee;
+
+
 
 class Minify{
 	

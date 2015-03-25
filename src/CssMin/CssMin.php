@@ -1,4 +1,5 @@
 <?php
+namespace PHPWee;
 /**
  * CssMin - A (simple) css minifier with benefits
  * 
