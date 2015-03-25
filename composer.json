@@ -1,10 +1,10 @@
 {
-    "name": "searchturbine/phpwee",
+    "name": "searchturbine/phpwee-php-minifier",
     "description": "A PHP minifier for HTML, CSS and JS files.  Provided by the http://searchturbine.com community code programme.",
 	"repositories": [
 	        {
 	            "type": "vcs",
-	            "url": "https://github.com/searchturbine/phpwee"
+	            "url": "https://github.com/searchturbine/phpwee-php-minifier"
 	        }
 	    ],
     "require": {
