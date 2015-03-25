@@ -1,6 +1,7 @@
 # phpwee-php-minifier
 
 
+
 PHPWee is an inline PHP minifier for web resources.  It lets you minify HTML4, HTML5, XHTML, CSS and JavaScript files in a single line of code.
 
 The best bit is its free and open source under the BSD license.
@@ -45,7 +46,7 @@ How to compress JS:
 $minified_js = PHPWee\Minify::html($any_js);
 ```
 
-
+Spelling out out:
 
 ```php
 
@@ -105,4 +106,4 @@ This technology would is ideally placed to be used in deployment scripts for web
 We "eat our own dog-food".    We will be using this package to optimize http://searchturbine.com - and will publish all results, insights and improvements.
 
 
-Open-source (BSD) PHP inline minifier functions for HTML, XHTML, HTML5, CSS 1-3 and Javascript.   
+
