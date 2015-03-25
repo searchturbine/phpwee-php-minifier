@@ -12,7 +12,7 @@
 	    ],
 	    "autoload": {
 	           "files": ["phpwee.php"]
-	       }
+	       },
     "require": {
         "php": ">=5.3.0"
     }
