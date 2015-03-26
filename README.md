@@ -73,7 +73,7 @@ There are working examples in the /examples folder of the package.
 Even highly optimized sites such as wikipedia.com, github.com and W3Schools.com can reduce the size of their HTML payload using PHPWee html compression. 
 
 
-![Performance Graph ](http://searchturbine.com/assets/phpwee/phpwee-performance.png)
+![Performance Graph ](http://searchturbine.com/assets/phpwee/phpwee-performace.png)
 
 
 
