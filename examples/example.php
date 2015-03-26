@@ -5,7 +5,7 @@ $html = file_get_contents("http://en.wikipedia.org/wiki/Minification_%28programm
 $minified = PHPWee\Minify::html($html);
 echo  print_performance_graph("Wikipedia",$minified,$html);
 
-
+/*
 $html = file_get_contents("http://www.codeproject.com/Articles/759094/Step-by-Step-PHP-Tutorials-for-Beginners-Creating");
 $minified = PHPWee\Minify::html($html);
 echo print_performance_graph("The Code Project",$minified,$html);
@@ -24,6 +24,7 @@ print_performance_graph("W3Schools",$minified,$html);
 $html = file_get_contents("http://searchturbine.com");
 $minified = PHPWee\Minify::html($html);
 print_performance_graph("SearchTurbine",$minified,$html);
+*/
 
 
 ///////////////////////////////////////////////////////////////

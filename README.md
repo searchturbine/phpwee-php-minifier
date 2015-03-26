@@ -13,7 +13,7 @@ The best bit is its free and open source under the BSD license.
 
 Installing PHPWee should only take a minute. Here are you 3 choices:
 
-- Download from SearchTurbine.com - http://searchturbine.com/downloads/community/phpwee.zip)
+- Download from SearchTurbine.com - http://searchturbine.com/downloads/community/phpwee.zip
 - Install a Composer package form Packagist.com - https://packagist.org/packages/searchturbine/phpwee-php-minifier
 - Hit the 'Download Zip' button on GitHub.
 
@@ -43,7 +43,7 @@ $minified_css = PHPWee\Minify::css($any_css);
 
 How to compress JS:
 ```php
-$minified_js = PHPWee\Minify::html($any_js);
+$minified_js = PHPWee\Minify::js($any_js);
 ```
 
 Spelling out out:
@@ -73,7 +73,7 @@ There are working examples in the /examples folder of the package.
 Even highly optimized sites such as wikipedia.com, github.com and W3Schools.com can reduce the size of their HTML payload using PHPWee html compression. 
 
 
-![Performance Graph ](http://searchturbine.com/assets/phpwee-performace.png)
+![Performance Graph ](http://searchturbine.com/assets/phpwee/phpwee-performance.png)
 
 
 
