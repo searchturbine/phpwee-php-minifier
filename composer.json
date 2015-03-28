@@ -4,16 +4,16 @@
     "type": "library",  
     "keywords": ["minify","min","compress","html","html5","css","css3","js","javascript","phpwee","php","php5","free","open source"],
 	"license": "BSD",
- 	"homepage": "searchturbine.com/php/phpwee",
+ 	"homepage": "http://searchturbine.com/php/phpwee",
 	"authors": [
 	        {
 	            "name": "Search Turbine - Open Source PHP Dev Team",
 	            "email": "community@searchturbine.com",
-	            "homepage": "http://searchturbine.com,
+	            "homepage": "http://searchturbine.com",
 	            "role": "Developer"
 	        }
 			],
-	"repositories": [
+	"repositories": [ 
 	        {
 	            "type": "vcs",
 	            "url": "https://github.com/searchturbine/phpwee-php-minifier"
