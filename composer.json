@@ -1,5 +1,5 @@
 {
-    "name": "searchturbine/phpwee-php-minifier",
+    "name": "searchturbine/phpwee-php-minifier", 
     "description": "A PHP minifier for HTML, CSS and JS files.",
     "type": "library",  
     "keywords": ["minify","min","compress","html","html5","css","css3","js","javascript","phpwee","php","php5","free","open source"],
