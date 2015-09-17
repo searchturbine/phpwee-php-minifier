@@ -6,22 +6,24 @@
 	"license": "BSD",
  	"homepage": "http://searchturbine.com/php/phpwee",
 	"authors": [
-	        {
-	            "name": "Search Turbine - Open Source PHP Dev Team",
-	            "email": "community@searchturbine.com",
-	            "homepage": "http://searchturbine.com",
-	            "role": "Developer"
-	        }
-			],
+	  {
+		  "name": "Search Turbine - Open Source PHP Dev Team",
+		  "email": "community@searchturbine.com",
+		  "homepage": "http://searchturbine.com",
+		  "role": "Developer"
+	  }
+	],
 	"repositories": [ 
-	        {
-	            "type": "vcs",
-	            "url": "https://github.com/searchturbine/phpwee-php-minifier"
-	        }
-	    ],
-	    "autoload": {
-	           "files": ["phpwee.php"]
-	       },
+		{
+			"type": "vcs",
+			"url": "https://github.com/searchturbine/phpwee-php-minifier"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+		  "PHPWee\\": "src/"
+		}
+    },
     "require": {
         "php": ">=5.3.0"
     }

@@ -24,7 +24,6 @@ class CssAtCharsetToken extends CssToken
      * Set the properties of @charset at-rule token.
      *
      * @param string $charset Charset of the @charset at-rule token
-     * @return void
      */
     public function __construct($charset)
     {

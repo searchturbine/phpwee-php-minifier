@@ -1,6 +1,8 @@
 <?php
 namespace PHPWee\CssMin;
 
+use PHPWee\JsMin\JsMin;
+
 /**
  * This {@link CssMinifierPlugin} compress the content of expresssion() declaration values.
  *
@@ -25,9 +27,8 @@ class CssCompressExpressionValuesMinifierPlugin extends CssMinifierPlugin
     public function apply(CssToken &$token)
     {
         if (class_exists("JSMin") && stripos($token->Value, "expression(") !== false) {
-            $value = $token->Value;
             $value = substr($token->Value, stripos($token->Value, "expression(") + 10);
-            $value = trim(JSMin::minify($value));
+            $value = trim(JsMin::minify($value));
             $token->Value = "expression(".$value.")";
         }
         return false;

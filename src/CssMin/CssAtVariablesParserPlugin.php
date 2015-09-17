@@ -42,12 +42,18 @@ class CssAtVariablesParserPlugin extends CssParserPlugin
      * @param integer $index Current index
      * @param string $char Current char
      * @param string $previousChar Previous char
-     * @return mixed TRUE will break the processing; FALSE continue with the next plugin; integer set a new index and break the processing
+     * @param $state
+     * @return mixed TRUE will break the processing;
+     *               FALSE continue with the next plugin;
+     *               integer set a new index and break the processing
      */
     public function parse($index, $char, $previousChar, $state)
     {
         // Start of @variables at-rule block
-        if ($char === "@" && $state === "T_DOCUMENT" && strtolower(substr($this->parser->getSource(), $index, 10)) === "@variables") {
+        if ($char === "@"
+            && $state === "T_DOCUMENT"
+            && strtolower(substr($this->parser->getSource(), $index, 10)) === "@variables"
+        ) {
             $this->parser->pushState("T_AT_VARIABLES::PREPARE");
             $this->parser->clearBuffer();
             return $index + 10;
@@ -67,7 +73,14 @@ class CssAtVariablesParserPlugin extends CssParserPlugin
             if ($this->buffer === "filter") {
                 return false;
             }
-            CssMin::triggerError(new CssError(__FILE__, __LINE__, __METHOD__.": Unterminated @variables declaration", $this->buffer.":".$this->parser->getBuffer()."_"));
+            CssMin::triggerError(
+                new CssError(
+                    __FILE__,
+                    __LINE__,
+                    __METHOD__.": Unterminated @variables declaration",
+                    $this->buffer.":".$this->parser->getBuffer()."_"
+                )
+            );
         } // End of @variables declaration
         elseif (($char === ";" || $char === "}") && $state === "T_AT_VARIABLES_DECLARATION") {
             $value = $this->parser->getAndClearBuffer(";}");
@@ -88,6 +101,7 @@ class CssAtVariablesParserPlugin extends CssParserPlugin
         } else {
             return false;
         }
+
         return true;
     }
 }

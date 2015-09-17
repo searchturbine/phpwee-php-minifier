@@ -27,7 +27,9 @@ class CssRemoveEmptyRulesetsMinifierFilter extends CssMinifierFilter
             $current = get_class($tokens[$i]);
             $next = isset($tokens[$i + 1]) ? get_class($tokens[$i + 1]) : false;
             if (($current === "CssRulesetStartToken" && $next === "CssRulesetEndToken") ||
-                ($current === "CssAtKeyframesRulesetStartToken" && $next === "CssAtKeyframesRulesetEndToken" && !array_intersect(array("from", "0%", "to", "100%"), array_map("strtolower", $tokens[$i]->Selectors)))
+                ($current === "CssAtKeyframesRulesetStartToken"
+                    && $next === "CssAtKeyframesRulesetEndToken"
+                    && !array_intersect(array("from", "0%", "to", "100%"), array_map("strtolower", $tokens[$i]->Selectors)))
             ) {
                 $tokens[$i] = null;
                 $tokens[$i + 1] = null;

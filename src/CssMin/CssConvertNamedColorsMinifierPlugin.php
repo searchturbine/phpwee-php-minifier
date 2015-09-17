@@ -32,14 +32,17 @@ class CssConvertNamedColorsMinifierPlugin extends CssMinifierPlugin
      * @var string
      */
     private $reMatch = null;
+
     /**
      * Regular expression replacing the value.
      *
      * @var string
      */
     private $reReplace = "\"\${1}\" . \$this->transformation[strtolower(\"\${2}\")] . \"\${3}\"";
+
     /**
-     * Transformation table used by the {@link CssConvertNamedColorsMinifierPlugin::$reReplace replace regular expression}.
+     * Transformation table used by the
+     * {@link CssConvertNamedColorsMinifierPlugin::$reReplace replace regular expression}.
      *
      * @var array
      */
@@ -186,12 +189,12 @@ class CssConvertNamedColorsMinifierPlugin extends CssMinifierPlugin
     /**
      * Overwrites {@link CssMinifierPlugin::__construct()}.
      *
-     * The constructor will create the {@link CssConvertNamedColorsMinifierPlugin::$reReplace replace regular expression}
+     * The constructor will create the
+     * {@link CssConvertNamedColorsMinifierPlugin::$reReplace replace regular expression}
      * based on the {@link CssConvertNamedColorsMinifierPlugin::$transformation transformation table}.
      *
      * @param CssMinifier $minifier The CssMinifier object of this plugin.
      * @param array $configuration Plugin configuration [optional]
-     * @return void
      */
     public function __construct(CssMinifier $minifier, array $configuration = array())
     {

@@ -49,7 +49,8 @@ class CssConvertFontWeightMinifierPlugin extends CssMinifierPlugin
      */
     private $reReplace = "\"\${1}\" . \$this->transformation[\"\${2}\"] . \"\${3}\"";
     /**
-     * Transformation table used by the {@link CssConvertFontWeightMinifierPlugin::$reReplace replace regular expression}.
+     * Transformation table used by the
+     * {@link CssConvertFontWeightMinifierPlugin::$reReplace replace regular expression}.
      *
      * @var array
      */
@@ -66,7 +67,6 @@ class CssConvertFontWeightMinifierPlugin extends CssMinifierPlugin
      * based on the {@link CssConvertFontWeightMinifierPlugin::$transformation transformation table}.
      *
      * @param CssMinifier $minifier The CssMinifier object of this plugin.
-     * @return void
      */
     public function __construct(CssMinifier $minifier)
     {

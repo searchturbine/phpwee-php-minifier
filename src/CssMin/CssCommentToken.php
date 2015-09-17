@@ -24,7 +24,6 @@ class CssCommentToken extends CssToken
      * Set the properties of a comment token.
      *
      * @param string $comment Comment including comment delimiters
-     * @return void
      */
     public function __construct($comment)
     {

@@ -29,8 +29,8 @@ class CssAtKeyframesStartToken extends CssAtBlockStartToken
     /**
      * Sets the properties of the @page at-rule.
      *
-     * @param string $selector Selector
-     * @return void
+     * @param $name
+     * @param null $atRuleName
      */
     public function __construct($name, $atRuleName = null)
     {

@@ -40,7 +40,6 @@ class CssMinifier
      * @param string $source CSS source [optional]
      * @param array $filters Filter configuration [optional]
      * @param array $plugins Plugin configuration [optional]
-     * @return void
      */
     public function __construct($source = null, array $filters = null, array $plugins = null)
     {
@@ -74,7 +73,13 @@ class CssMinifier
                 if (class_exists($class)) {
                     $this->filters[] = new $class($this, $config);
                 } else {
-                    CssMin::triggerError(new CssError(__FILE__, __LINE__, __METHOD__.": The filter <code>".$name."</code> with the class name <code>".$class."</code> was not found"));
+                    CssMin::triggerError(
+                        new CssError(
+                            __FILE__,
+                            __LINE__,
+                            __METHOD__.": The filter <code>".$name."</code> with the class name <code>".$class."</code> was not found"
+                        )
+                    );
                 }
             }
         }
@@ -86,7 +91,13 @@ class CssMinifier
                 if (class_exists($class)) {
                     $this->plugins[] = new $class($this, $config);
                 } else {
-                    CssMin::triggerError(new CssError(__FILE__, __LINE__, __METHOD__.": The plugin <code>".$name."</code> with the class name <code>".$class."</code> was not found"));
+                    CssMin::triggerError(
+                        new CssError(
+                            __FILE__,
+                            __LINE__,
+                            __METHOD__.": The plugin <code>".$name."</code> with the class name <code>".$class."</code> was not found"
+                        )
+                    );
                 }
             }
         }
@@ -109,7 +120,7 @@ class CssMinifier
     /**
      * Returns a plugin by class name.
      *
-     * @param string $name Class name of the plugin
+     * @param string $class Class name of the plugin
      * @return CssMinifierPlugin
      */
     public function getPlugin($class)
@@ -173,7 +184,9 @@ class CssMinifier
             $triggerToken = "|".get_class($tokens[$i])."|";
             if (strpos($globalTriggerTokens, $triggerToken) !== false) {
                 for ($ii = 0; $ii < $pluginCount; $ii++) {
-                    if (strpos($pluginTriggerTokens[$ii], $triggerToken) !== false || $pluginTriggerTokens[$ii] === false) {
+                    if (strpos($pluginTriggerTokens[$ii], $triggerToken) !== false
+                        || $pluginTriggerTokens[$ii] === false
+                    ) {
                         // Apply the plugin; if the return value is TRUE continue to the next token
                         if ($plugins[$ii]->apply($tokens[$i]) === true) {
                             continue 2;
@@ -187,6 +200,7 @@ class CssMinifier
             $r .= (string)$tokens[$i];
         }
         $this->minified = $r;
+
         return $r;
     }
 }

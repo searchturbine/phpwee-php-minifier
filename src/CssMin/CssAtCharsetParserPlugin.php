@@ -41,21 +41,29 @@ class CssAtCharsetParserPlugin extends CssParserPlugin
      * @param integer $index Current index
      * @param string $char Current char
      * @param string $previousChar Previous char
-     * @return mixed TRUE will break the processing; FALSE continue with the next plugin; integer set a new index and break the processing
+     * @param $state
+     * @return mixed TRUE will break the processing;
+     *               FALSE continue with the next plugin;
+     *               integer set a new index and break the processing
      */
     public function parse($index, $char, $previousChar, $state)
     {
-        if ($char === "@" && $state === "T_DOCUMENT" && strtolower(substr($this->parser->getSource(), $index, 8)) === "@charset") {
+        if ($char === "@"
+            && $state === "T_DOCUMENT"
+            && strtolower(substr($this->parser->getSource(), $index, 8)) === "@charset"
+        ) {
             $this->parser->pushState("T_AT_CHARSET");
             $this->parser->clearBuffer();
             return $index + 8;
-        } elseif (($char === ";" || $char === "\n") && $state === "T_AT_CHARSET") {
+        }
+
+        if (($char === ";" || $char === "\n") && $state === "T_AT_CHARSET") {
             $charset = $this->parser->getAndClearBuffer(";");
             $this->parser->popState();
             $this->parser->appendToken(new CssAtCharsetToken($charset));
-        } else {
-            return false;
+            return true;
         }
-        return true;
+
+        return false;
     }
 }

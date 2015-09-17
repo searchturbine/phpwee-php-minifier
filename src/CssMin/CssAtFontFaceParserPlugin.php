@@ -42,12 +42,18 @@ class CssAtFontFaceParserPlugin extends CssParserPlugin
      * @param integer $index Current index
      * @param string $char Current char
      * @param string $previousChar Previous char
-     * @return mixed TRUE will break the processing; FALSE continue with the next plugin; integer set a new index and break the processing
+     * @param $state
+     * @return mixed TRUE will break the processing;
+     *               FALSE continue with the next plugin;
+     *               integer set a new index and break the processing
      */
     public function parse($index, $char, $previousChar, $state)
     {
         // Start of @font-face at-rule block
-        if ($char === "@" && $state === "T_DOCUMENT" && strtolower(substr($this->parser->getSource(), $index, 10)) === "@font-face") {
+        if ($char === "@"
+            && $state === "T_DOCUMENT"
+            && strtolower(substr($this->parser->getSource(), $index, 10)) === "@font-face"
+        ) {
             $this->parser->pushState("T_AT_FONT_FACE::PREPARE");
             $this->parser->clearBuffer();
             return $index + 10;
@@ -66,9 +72,16 @@ class CssAtFontFaceParserPlugin extends CssParserPlugin
             if ($this->buffer === "filter") {
                 return false;
             }
-            CssMin::triggerError(new CssError(__FILE__, __LINE__, __METHOD__.": Unterminated @font-face declaration", $this->buffer.":".$this->parser->getBuffer()."_"));
-        } // End of @font-face declaration
-        elseif (($char === ";" || $char === "}") && $state === "T_AT_FONT_FACE_DECLARATION") {
+            CssMin::triggerError(
+                new CssError(
+                    __FILE__,
+                    __LINE__,
+                    __METHOD__.": Unterminated @font-face declaration",
+                    $this->buffer.":".$this->parser->getBuffer()."_"
+                )
+            );
+        } elseif (($char === ";" || $char === "}") && $state === "T_AT_FONT_FACE_DECLARATION") {
+            // End of @font-face declaration
             $value = $this->parser->getAndClearBuffer(";}");
             if (strtolower(substr($value, -10, 10)) === "!important") {
                 $value = trim(substr($value, 0, -10));
@@ -84,14 +97,14 @@ class CssAtFontFaceParserPlugin extends CssParserPlugin
                 $this->parser->appendToken(new CssAtFontFaceEndToken());
                 $this->parser->popState();
             }
-        } // End of @font-face at-rule block
-        elseif ($char === "}" && $state === "T_AT_FONT_FACE") {
+        } elseif ($char === "}" && $state === "T_AT_FONT_FACE") { // End of @font-face at-rule block
             $this->parser->appendToken(new CssAtFontFaceEndToken());
             $this->parser->clearBuffer();
             $this->parser->popState();
         } else {
             return false;
         }
+
         return true;
     }
 }

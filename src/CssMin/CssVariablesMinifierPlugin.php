@@ -76,7 +76,14 @@ class CssVariablesMinifierPlugin extends CssMinifierPlugin
                     }
                 }
                 // If no value was found trigger an error and replace the token with a CssNullToken
-                CssMin::triggerError(new CssError(__FILE__, __LINE__, __METHOD__.": No value found for variable <code>".$variable."</code> in media types <code>".implode(", ", $mediaTypes)."</code>", (string)$token));
+                CssMin::triggerError(
+                    new CssError(
+                        __FILE__,
+                        __LINE__,
+                        __METHOD__.": No value found for variable <code>".$variable."</code> in media types <code>".implode(", ", $mediaTypes)."</code>",
+                        (string)$token
+                    )
+                );
                 $token = new CssNullToken();
                 return true;
             }

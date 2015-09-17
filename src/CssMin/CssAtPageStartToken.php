@@ -24,7 +24,6 @@ class CssAtPageStartToken extends CssAtBlockStartToken
      * Sets the properties of the @page at-rule.
      *
      * @param string $selector Selector
-     * @return void
      */
     public function __construct($selector = "")
     {

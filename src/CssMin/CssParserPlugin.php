@@ -67,6 +67,7 @@ abstract class CssParserPlugin
      * @param integer $index Current index
      * @param string $char Current char
      * @param string $previousChar Previous char
+     * @param $state
      * @return mixed TRUE will break the processing;
      *               FALSE continue with the next plugin;
      *               integer set a new index and break the processing

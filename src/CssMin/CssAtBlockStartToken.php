@@ -13,5 +13,4 @@ namespace PHPWee\CssMin;
  */
 abstract class CssAtBlockStartToken extends CssToken
 {
-
 }

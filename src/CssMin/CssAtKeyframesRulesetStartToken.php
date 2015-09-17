@@ -24,7 +24,6 @@ class CssAtKeyframesRulesetStartToken extends CssRulesetStartToken
      * Set the properties of a ruleset token.
      *
      * @param array $selectors Selectors of the ruleset
-     * @return void
      */
     public function __construct(array $selectors = array())
     {

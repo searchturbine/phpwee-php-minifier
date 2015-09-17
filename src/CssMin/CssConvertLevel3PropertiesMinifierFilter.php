@@ -22,7 +22,7 @@ class CssConvertLevel3PropertiesMinifierFilter extends CssMinifierFilter
      */
     private $transformations = array
     (
-        // Property                        Array(Mozilla, Webkit, Opera, Internet Explorer); NULL values are placeholders and will get ignored
+        // Property Array(Mozilla, Webkit, Opera, Internet Explorer); NULL values are placeholders and will get ignored
         "animation" => array(null, "-webkit-animation", null, null),
         "animation-delay" => array(null, "-webkit-animation-delay", null, null),
         "animation-direction" => array(null, "-webkit-animation-direction", null, null),
@@ -52,8 +52,18 @@ class CssConvertLevel3PropertiesMinifierFilter extends CssMinifierFilter
         "border-before-style" => array(null, "-webkit-border-before-style", null, null),
         "border-before-width" => array(null, "-webkit-border-before-width", null, null),
         "border-border-bottom-colors" => array("-moz-border-bottom-colors", null, null, null),
-        "border-bottom-left-radius" => array("-moz-border-radius-bottomleft", "-webkit-border-bottom-left-radius", null, null),
-        "border-bottom-right-radius" => array("-moz-border-radius-bottomright", "-webkit-border-bottom-right-radius", null, null),
+        "border-bottom-left-radius" => array(
+            "-moz-border-radius-bottomleft",
+            "-webkit-border-bottom-left-radius",
+            null,
+            null
+        ),
+        "border-bottom-right-radius" => array(
+            "-moz-border-radius-bottomright",
+            "-webkit-border-bottom-right-radius",
+            null,
+            null
+        ),
         "border-end" => array("-moz-border-end", "-webkit-border-end", null, null),
         "border-end-color" => array("-moz-border-end-color", "-webkit-border-end-color", null, null),
         "border-end-style" => array("-moz-border-end-style", "-webkit-border-end-style", null, null),
@@ -70,7 +80,12 @@ class CssConvertLevel3PropertiesMinifierFilter extends CssMinifierFilter
         "border-start-width" => array("-moz-border-start-width", "-webkit-border-start-width", null, null),
         "border-top-colors" => array("-moz-border-top-colors", null, null, null),
         "border-top-left-radius" => array("-moz-border-radius-topleft", "-webkit-border-top-left-radius", null, null),
-        "border-top-right-radius" => array("-moz-border-radius-topright", "-webkit-border-top-right-radius", null, null),
+        "border-top-right-radius" => array(
+            "-moz-border-radius-topright",
+            "-webkit-border-top-right-radius",
+            null,
+            null
+        ),
         "border-vertical-spacing" => array(null, "-webkit-border-vertical-spacing", null, null),
         "box-align" => array("-moz-box-align", "-webkit-box-align", null, null),
         "box-direction" => array("-moz-box-direction", "-webkit-box-direction", null, null),
@@ -107,7 +122,7 @@ class CssConvertLevel3PropertiesMinifierFilter extends CssMinifierFilter
         "hyphenate-character" => array(null, "-webkit-hyphenate-character", null, null),
         "hyphenate-locale" => array(null, "-webkit-hyphenate-locale", null, null),
         "hyphens" => array(null, "-webkit-hyphens", null, null),
-        "force-broken-image-icon" => array("-moz-image-region", null, null, null),
+        "image-region" => array("-moz-image-region", null, null, null),
         "ime-mode" => array(null, null, null, "-ms-ime-mode"),
         "interpolation-mode" => array(null, null, null, "-ms-interpolation-mode"),
         "layout-flow" => array(null, null, null, "-ms-layout-flow"),
@@ -210,9 +225,24 @@ class CssConvertLevel3PropertiesMinifierFilter extends CssMinifierFilter
         "transform-style" => array(null, "-webkit-transform-style", null, null),
         "transition" => array("-moz-transition", "-webkit-transition", "-o-transition", null),
         "transition-delay" => array("-moz-transition-delay", "-webkit-transition-delay", "-o-transition-delay", null),
-        "transition-duration" => array("-moz-transition-duration", "-webkit-transition-duration", "-o-transition-duration", null),
-        "transition-property" => array("-moz-transition-property", "-webkit-transition-property", "-o-transition-property", null),
-        "transition-timing-function" => array("-moz-transition-timing-function", "-webkit-transition-timing-function", "-o-transition-timing-function", null),
+        "transition-duration" => array(
+            "-moz-transition-duration",
+            "-webkit-transition-duration",
+            "-o-transition-duration",
+            null
+        ),
+        "transition-property" => array(
+            "-moz-transition-property",
+            "-webkit-transition-property",
+            "-o-transition-property",
+            null
+        ),
+        "transition-timing-function" => array(
+            "-moz-transition-timing-function",
+            "-webkit-transition-timing-function",
+            "-o-transition-timing-function",
+            null
+        ),
         "user-drag" => array(null, "-webkit-user-drag", null, null),
         "user-focus" => array("-moz-user-focus", null, null, null),
         "user-input" => array("-moz-user-input", null, null, null),
@@ -273,12 +303,13 @@ class CssConvertLevel3PropertiesMinifierFilter extends CssMinifierFilter
      * @param CssToken $token
      * @return array
      */
-    private static function filter($token)
+    private static function filter(CssToken $token)
     {
         $r = array
         (
             new CssRulesetDeclarationToken("-ms-filter", "\"".$token->Value."\"", $token->MediaTypes),
         );
+
         return $r;
     }
 
@@ -300,6 +331,7 @@ class CssConvertLevel3PropertiesMinifierFilter extends CssMinifierFilter
             new CssRulesetDeclarationToken("filter", "alpha(opacity=".$ieValue.")", $token->MediaTypes),
             new CssRulesetDeclarationToken("zoom", "1", $token->MediaTypes)
         );
+
         return $r;
     }
 
@@ -326,8 +358,8 @@ class CssConvertLevel3PropertiesMinifierFilter extends CssMinifierFilter
                 new CssRulesetDeclarationToken("word-wrap", "break-word", $token->MediaTypes)
             );
             return $r;
-        } else {
-            return array();
         }
+
+        return array();
     }
 }

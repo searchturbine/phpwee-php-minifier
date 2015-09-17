@@ -42,12 +42,18 @@ class CssAtPageParserPlugin extends CssParserPlugin
      * @param integer $index Current index
      * @param string $char Current char
      * @param string $previousChar Previous char
-     * @return mixed TRUE will break the processing; FALSE continue with the next plugin; integer set a new index and break the processing
+     * @param $state
+     * @return mixed TRUE will break the processing;
+     *               FALSE continue with the next plugin;
+     *               integer set a new index and break the processing
      */
     public function parse($index, $char, $previousChar, $state)
     {
         // Start of @page at-rule block
-        if ($char === "@" && $state === "T_DOCUMENT" && strtolower(substr($this->parser->getSource(), $index, 5)) === "@page") {
+        if ($char === "@"
+            && $state === "T_DOCUMENT"
+            && strtolower(substr($this->parser->getSource(), $index, 5)) === "@page"
+        ) {
             $this->parser->pushState("T_AT_PAGE::SELECTOR");
             $this->parser->clearBuffer();
             return $index + 5;
@@ -67,7 +73,14 @@ class CssAtPageParserPlugin extends CssParserPlugin
             if ($this->buffer === "filter") {
                 return false;
             }
-            CssMin::triggerError(new CssError(__FILE__, __LINE__, __METHOD__.": Unterminated @page declaration", $this->buffer.":".$this->parser->getBuffer()."_"));
+            CssMin::triggerError(
+                new CssError(
+                    __FILE__,
+                    __LINE__,
+                    __METHOD__.": Unterminated @page declaration",
+                    $this->buffer.":".$this->parser->getBuffer()."_"
+                )
+            );
         } // End of @page declaration
         elseif (($char === ";" || $char === "}") && $state == "T_AT_PAGE_DECLARATION") {
             $value = $this->parser->getAndClearBuffer(";}");
@@ -93,6 +106,7 @@ class CssAtPageParserPlugin extends CssParserPlugin
         } else {
             return false;
         }
+
         return true;
     }
 }

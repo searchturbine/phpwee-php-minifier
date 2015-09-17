@@ -17,7 +17,6 @@ class CssAtMediaStartToken extends CssAtBlockStartToken
      * Sets the properties of the @media at-rule.
      *
      * @param array $mediaTypes Media types
-     * @return void
      */
     public function __construct(array $mediaTypes = array())
     {

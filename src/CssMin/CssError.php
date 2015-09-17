@@ -41,9 +41,10 @@ class CssError
     /**
      * Constructor triggering the error.
      *
+     * @param $file
+     * @param $line
      * @param string $message Error message
      * @param string $source Corresponding line [optional]
-     * @return void
      */
     public function __construct($file, $line, $message, $source = "")
     {
@@ -60,6 +61,11 @@ class CssError
      */
     public function __toString()
     {
-        return $this->Message.($this->Source ? ": <br /><code>".$this->Source."</code>" : "")."<br />in file ".$this->File." at line ".$this->Line;
+        return $this->Message
+            . ($this->Source ? ": <br /><code>".$this->Source."</code>" : "")
+            . "<br />in file "
+            . $this->File
+            . " at line "
+            . $this->Line;
     }
 }

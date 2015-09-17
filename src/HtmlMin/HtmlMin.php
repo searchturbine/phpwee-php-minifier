@@ -32,6 +32,9 @@ namespace PHPWee\HtmlMin;
  *
  */
 
+use PHPWee\CssMin\CssMin;
+use PHPWee\JsMin\JsMin;
+
 /**
  * Class HtmlMin
  *
@@ -59,6 +62,8 @@ class HtmlMin
         $doc->normalizeDocument();
         $textnodes = $xpath->query('//text()');
         $skip = ["style","pre","code","script","textarea"];
+
+        /** @var \DOMNode $t */
         foreach ($textnodes as $t) {
             $xp = $t->getNodePath();
             $doskip = false;
@@ -97,30 +102,45 @@ class HtmlMin
 
         if ($js) {
             $scriptnodes = $xpath->query('//script');
+
+            /** @var \DOMNode $d */
             foreach ($scriptnodes as $d) {
-                if ($d->hasAttribute("type") && strtolower($d->getAttribute("type"))!=='text/javascript' ) {
+                $attributes = [];
+                foreach ($d->attributes as $attr) {
+                    $attributes[$attr->nodeName] = $attr->nodeValue;
+                }
+
+                if (isset($attributes['type']) && (strtolower($d['type']) !== 'text/javascript')) {
                     continue;
                 }
-                if ($d->hasAttribute("data-no-min")) {
+
+                if (isset($attributes['data-no-min'])) {
                     continue;
                 }
+
                 if (trim($d->nodeValue)=="") {
                     continue;
                 }
-                $d->nodeValue = \PHPWee\JSMin::minify($d->nodeValue);
+                $d->nodeValue = JsMin::minify($d->nodeValue);
             }
         }
 
         if ($css) {
             $cssnodes = $xpath->query('//style');
             foreach ($cssnodes as $d) {
-                if ($d->hasAttribute("data-no-min")) {
+                $attributes = [];
+                foreach ($d->attributes as $attr) {
+                    $attributes[$attr->nodeName] = $attr->nodeValue;
+                }
+
+                if (isset($attributes['data-no-min'])) {
                     continue;
                 }
+
                 if (trim($d->nodeValue) == "") {
                     continue;
                 }
-                $d->nodeValue = \PHPWee\CssMin::minify($d->nodeValue);
+                $d->nodeValue = CssMin::minify($d->nodeValue);
             }
         }
         return ($doc->saveHTML());

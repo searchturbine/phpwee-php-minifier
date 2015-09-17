@@ -31,7 +31,6 @@ class CssAtImportToken extends CssToken
      *
      * @param string $import Import path
      * @param array $mediaTypes Media types
-     * @return void
      */
     public function __construct($import, $mediaTypes)
     {
@@ -46,6 +45,8 @@ class CssAtImportToken extends CssToken
      */
     public function __toString()
     {
-        return "@import \"".$this->Import."\"".(count($this->MediaTypes) > 0 ? " ".implode(",", $this->MediaTypes) : "").";";
+        return "@import \"".$this->Import."\""
+            . (count($this->MediaTypes) > 0 ? " ".implode(",", $this->MediaTypes) : "")
+            . ";";
     }
 }

@@ -69,12 +69,6 @@ namespace PHPWee\CssMin;
 class CssMin
 {
     /**
-     * Index of classes
-     *
-     * @var array
-     */
-    private static $classIndex = array();
-    /**
      * Parse/minify errors
      *
      * @var array

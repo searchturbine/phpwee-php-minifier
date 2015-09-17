@@ -69,7 +69,6 @@ class CssParser
      *
      * @param string $source CSS source [optional]
      * @param array $plugins Plugin configuration [optional]
-     * @return void
      */
     public function __construct($source = null, array $plugins = null)
     {
@@ -96,7 +95,13 @@ class CssParser
                 if (class_exists($class)) {
                     $this->plugins[] = new $class($this, $config);
                 } else {
-                    CssMin::triggerError(new CssError(__FILE__, __LINE__, __METHOD__.": The plugin <code>".$name."</code> with the class name <code>".$class."</code> was not found"));
+                    CssMin::triggerError(
+                        new CssError(
+                            __FILE__,
+                            __LINE__,
+                            __METHOD__.": The plugin <code>".$name."</code> with the class name <code>".$class."</code> was not found"
+                        )
+                    );
                 }
             }
         }
@@ -192,7 +197,7 @@ class CssParser
     /**
      * Returns a plugin by class name.
      *
-     * @param string $name Class name of the plugin
+     * @param string $class Class name of the plugin
      * @return CssParserPlugin
      */
     public function getPlugin($class)
@@ -239,7 +244,7 @@ class CssParser
         // Reset
         $this->source = "";
         $this->tokens = array();
-        // Create a global and plugin lookup table for trigger chars; set array of plugins as local variable and create 
+        // Create a global and plugin lookup table for trigger chars; set array of plugins as local variable and create
         // several helper variables for plugin handling
         $globalTriggerChars = "";
         $plugins = $this->plugins;
@@ -251,7 +256,9 @@ class CssParser
             $tPluginClassName = get_class($plugins[$i]);
             $pluginTriggerChars[$i] = implode("", $plugins[$i]->getTriggerChars());
             $tPluginTriggerStates = $plugins[$i]->getTriggerStates();
-            $pluginTriggerStates[$i] = $tPluginTriggerStates === false ? false : "|".implode("|", $tPluginTriggerStates)."|";
+            $pluginTriggerStates[$i] = ($tPluginTriggerStates === false)
+                ? false
+                : "|".implode("|", $tPluginTriggerStates)."|";
             $pluginIndex[$tPluginClassName] = $i;
             for ($ii = 0, $ll = strlen($pluginTriggerChars[$i]); $ii < $ll; $ii++) {
                 $c = substr($pluginTriggerChars[$i], $ii, 1);
@@ -285,10 +292,13 @@ class CssParser
             $buffer .= $c;
             // Extended processing only if the current char is a global trigger char
             if (strpos($globalTriggerChars, $c) !== false) {
-                // Exclusive state is set; process with the exclusive plugin 
+                // Exclusive state is set; process with the exclusive plugin
                 if ($exclusive) {
                     $tPluginIndex = $pluginIndex[$exclusive];
-                    if (strpos($pluginTriggerChars[$tPluginIndex], $c) !== false && ($pluginTriggerStates[$tPluginIndex] === false || strpos($pluginTriggerStates[$tPluginIndex], $state) !== false)) {
+                    if (strpos($pluginTriggerChars[$tPluginIndex], $c) !== false
+                        && ($pluginTriggerStates[$tPluginIndex] === false
+                            || strpos($pluginTriggerStates[$tPluginIndex], $state) !== false)
+                    ) {
                         $r = $plugins[$tPluginIndex]->parse($i, $c, $p, $state);
                         // Return value is TRUE => continue with next char
                         if ($r === true) {
@@ -304,13 +314,17 @@ class CssParser
                     $triggerState = "|".$state."|";
                     for ($ii = 0, $ll = $pluginCount; $ii < $ll; $ii++) {
                         // Only process if the current char is one of the plugin trigger chars
-                        if (strpos($pluginTriggerChars[$ii], $c) !== false && ($pluginTriggerStates[$ii] === false || strpos($pluginTriggerStates[$ii], $triggerState) !== false)) {
+                        if (strpos($pluginTriggerChars[$ii], $c) !== false
+                            && ($pluginTriggerStates[$ii] === false
+                                || strpos($pluginTriggerStates[$ii], $triggerState) !== false)
+                        ) {
                             // Process with the plugin
                             $r = $plugins[$ii]->parse($i, $c, $p, $state);
                             // Return value is TRUE => break the plugin loop and and continue with next char
                             if ($r === true) {
                                 break;
-                            } // Return value is numeric => set new index, break the plugin loop and and continue with next char
+                            } // Return value is numeric => set new index, break the plugin loop and
+                            // continue with next char
                             elseif ($r !== false && $r != $i) {
                                 $i = $r;
                                 break;
@@ -383,7 +397,8 @@ class CssParser
     }
 
     /**
-     * Sets the current state in the state stack; equals to {@link CssParser::popState()} + {@link CssParser::pushState()}.
+     * Sets the current state in the state stack; equals to
+     * {@link CssParser::popState()} + {@link CssParser::pushState()}.
      *
      * @param integer $state State to set
      * @return integer

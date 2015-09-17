@@ -56,7 +56,7 @@ namespace PHPWee\JsMin;
  * @link http://code.google.com/p/jsmin-php/
  */
 
-class JSMin
+class JsMin
 {
     const ORD_LF            = 10;
     const ORD_SPACE         = 32;

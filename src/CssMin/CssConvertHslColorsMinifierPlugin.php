@@ -89,7 +89,11 @@ class CssConvertHslColorsMinifierPlugin extends CssMinifierPlugin
             $green = 255 * self::hue2rgb($v1, $v2, $hue);
             $blue = 255 * self::hue2rgb($v1, $v2, $hue - (1 / 3));
         }
-        return "#".str_pad(dechex(round($red)), 2, "0", STR_PAD_LEFT).str_pad(dechex(round($green)), 2, "0", STR_PAD_LEFT).str_pad(dechex(round($blue)), 2, "0", STR_PAD_LEFT);
+
+        return "#"
+            . str_pad(dechex(round($red)), 2, "0", STR_PAD_LEFT)
+            . str_pad(dechex(round($green)), 2, "0", STR_PAD_LEFT)
+            . str_pad(dechex(round($blue)), 2, "0", STR_PAD_LEFT);
     }
 
     /**

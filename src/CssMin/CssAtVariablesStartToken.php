@@ -24,7 +24,6 @@ class CssAtVariablesStartToken extends CssAtBlockStartToken
      * Set the properties of a @variables at-rule token.
      *
      * @param array $mediaTypes Media types
-     * @return void
      */
     public function __construct($mediaTypes = null)
     {

@@ -25,7 +25,6 @@ class CssVariablesMinifierFilter extends CssMinifierFilter
     {
         $variables = array();
         $defaultMediaTypes = array("all");
-        $mediaTypes = array();
         $remove = array();
         for ($i = 0, $l = count($tokens); $i < $l; $i++) {
             // @variables at-rule block found
@@ -38,7 +37,7 @@ class CssVariablesMinifierFilter extends CssMinifierFilter
                     }
                 }
                 // Read the variable declaration tokens
-                for ($i = $i; $i < $l; $i++) {
+                for (; $i < $l; $i++) {
                     // Found a variable declaration => read the variable values
                     if (get_class($tokens[$i]) === "CssAtVariablesDeclarationToken") {
                         foreach ($mediaTypes as $mediaType) {

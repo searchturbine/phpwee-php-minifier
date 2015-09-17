@@ -41,7 +41,14 @@ class CssAtKeyframesParserPlugin extends CssParserPlugin
      */
     public function getTriggerStates()
     {
-        return array("T_DOCUMENT", "T_AT_KEYFRAMES::NAME", "T_AT_KEYFRAMES", "T_AT_KEYFRAMES_RULESETS", "T_AT_KEYFRAMES_RULESET", "T_AT_KEYFRAMES_RULESET_DECLARATION");
+        return array(
+            "T_DOCUMENT",
+            "T_AT_KEYFRAMES::NAME",
+            "T_AT_KEYFRAMES",
+            "T_AT_KEYFRAMES_RULESETS",
+            "T_AT_KEYFRAMES_RULESET",
+            "T_AT_KEYFRAMES_RULESET_DECLARATION"
+        );
     }
 
     /**
@@ -50,24 +57,36 @@ class CssAtKeyframesParserPlugin extends CssParserPlugin
      * @param integer $index Current index
      * @param string $char Current char
      * @param string $previousChar Previous char
-     * @return mixed TRUE will break the processing; FALSE continue with the next plugin; integer set a new index and break the processing
+     * @param $state
+     * @return mixed TRUE will break the processing;
+     *               FALSE continue with the next plugin;
+     *               integer set a new index and break the processing
      */
     public function parse($index, $char, $previousChar, $state)
     {
         // Start of @keyframes at-rule block
-        if ($char === "@" && $state === "T_DOCUMENT" && strtolower(substr($this->parser->getSource(), $index, 10)) === "@keyframes") {
+        if ($char === "@"
+            && $state === "T_DOCUMENT"
+            && strtolower(substr($this->parser->getSource(), $index, 10)) === "@keyframes"
+        ) {
             $this->atRuleName = "keyframes";
             $this->parser->pushState("T_AT_KEYFRAMES::NAME");
             $this->parser->clearBuffer();
             return $index + 10;
         } // Start of @keyframes at-rule block (@-moz-keyframes)
-        elseif ($char === "@" && $state === "T_DOCUMENT" && strtolower(substr($this->parser->getSource(), $index, 15)) === "@-moz-keyframes") {
+        elseif ($char === "@"
+            && $state === "T_DOCUMENT"
+            && strtolower(substr($this->parser->getSource(), $index, 15)) === "@-moz-keyframes"
+        ) {
             $this->atRuleName = "-moz-keyframes";
             $this->parser->pushState("T_AT_KEYFRAMES::NAME");
             $this->parser->clearBuffer();
             return $index + 15;
         } // Start of @keyframes at-rule block (@-webkit-keyframes)
-        elseif ($char === "@" && $state === "T_DOCUMENT" && strtolower(substr($this->parser->getSource(), $index, 18)) === "@-webkit-keyframes") {
+        elseif ($char === "@"
+            && $state === "T_DOCUMENT"
+            && strtolower(substr($this->parser->getSource(), $index, 18)) === "@-webkit-keyframes"
+        ) {
             $this->atRuleName = "-webkit-keyframes";
             $this->parser->pushState("T_AT_KEYFRAMES::NAME");
             $this->parser->clearBuffer();
@@ -100,7 +119,14 @@ class CssAtKeyframesParserPlugin extends CssParserPlugin
             if ($this->buffer === "filter") {
                 return false;
             }
-            CssMin::triggerError(new CssError(__FILE__, __LINE__, __METHOD__.": Unterminated @keyframes ruleset declaration", $this->buffer.":".$this->parser->getBuffer()."_"));
+            CssMin::triggerError(
+                new CssError(
+                    __FILE__,
+                    __LINE__,
+                    __METHOD__.": Unterminated @keyframes ruleset declaration",
+                    $this->buffer.":".$this->parser->getBuffer()."_"
+                )
+            );
         } // End of declaration
         elseif (($char === ";" || $char === "}") && $state === "T_AT_KEYFRAMES_RULESET_DECLARATION") {
             $value = $this->parser->getAndClearBuffer(";}");
@@ -132,6 +158,7 @@ class CssAtKeyframesParserPlugin extends CssParserPlugin
         } else {
             return false;
         }
+
         return true;
     }
 }

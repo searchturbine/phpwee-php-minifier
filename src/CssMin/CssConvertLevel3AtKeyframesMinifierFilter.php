@@ -2,7 +2,8 @@
 namespace PHPWee\CssMin;
 
 /**
- * This {@link CssMinifierFilter minifier filter} will convert @keyframes at-rule block to browser specific counterparts.
+ * This {@link CssMinifierFilter minifier filter} will convert
+ * @keyframes at-rule block to browser specific counterparts.
  *
  * @package        CssMin/Minifier/Filters
  * @link        http://code.google.com/p/cssmin/

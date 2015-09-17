@@ -48,7 +48,10 @@ class CssCommentParserPlugin extends CssParserPlugin
      * @param integer $index Current index
      * @param string $char Current char
      * @param string $previousChar Previous char
-     * @return mixed TRUE will break the processing; FALSE continue with the next plugin; integer set a new index and break the processing
+     * @param $state
+     * @return mixed TRUE will break the processing;
+     *               FALSE continue with the next plugin;
+     *               integer set a new index and break the processing
      */
     public function parse($index, $char, $previousChar, $state)
     {
@@ -64,6 +67,7 @@ class CssCommentParserPlugin extends CssParserPlugin
         } else {
             return false;
         }
+
         return true;
     }
 }

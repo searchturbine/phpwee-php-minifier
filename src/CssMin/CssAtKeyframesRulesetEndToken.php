@@ -13,5 +13,4 @@ namespace PHPWee\CssMin;
  */
 class CssAtKeyframesRulesetEndToken extends CssRulesetEndToken
 {
-
 }

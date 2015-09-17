@@ -16,6 +16,21 @@ namespace PHPWee\CssMin;
 abstract class CssToken
 {
     /**
+     * @var array
+     */
+    public $MediaTypes = array();
+
+    /**
+     * @var string
+     */
+    public $Property = "";
+
+    /**
+     * @var string
+     */
+    public $Value = "";
+
+    /**
      * Returns the token as string.
      *
      * @return string

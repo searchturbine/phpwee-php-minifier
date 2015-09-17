@@ -2,7 +2,8 @@
 namespace PHPWee\CssMin;
 
 /**
- * {@link CssFormatter Formatter} returning the CSS source in {@link http://goo.gl/j4XdU OTBS indent style} (The One True Brace Style).
+ * {@link CssFormatter Formatter} returning the CSS source in
+ * {@link http://goo.gl/j4XdU OTBS indent style} (The One True Brace Style).
  *
  * @package        CssMin/Formatter
  * @link        http://code.google.com/p/cssmin/
