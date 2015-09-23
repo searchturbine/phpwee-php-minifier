@@ -1,8 +1,14 @@
 <?php
-require_once("../PHPWee.php");
+function myAutoloader($class)
+{
+    $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+    include __DIR__.'/../src/'.$class.'.php';
+}
+
+spl_autoload_register('myAutoloader');
 
 $html = file_get_contents("http://en.wikipedia.org/wiki/Minification_%28programming%29");
-$minified = PHPWee\Minify::html($html);
+$minified = PHPWee\PHPWee::html($html);
 print_performance_graph("Wikipedia", $minified, $html);
 
 /*

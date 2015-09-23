@@ -90,7 +90,7 @@ class CssParser
         // Create plugin instances
         foreach ($plugins as $name => $config) {
             if ($config !== false) {
-                $class = "Css".$name."ParserPlugin";
+                $class = '\\'.__NAMESPACE__."\Css".$name."ParserPlugin";
                 $config = is_array($config) ? $config : array();
                 if (class_exists($class)) {
                     $this->plugins[] = new $class($this, $config);

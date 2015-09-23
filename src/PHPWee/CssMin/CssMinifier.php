@@ -68,7 +68,7 @@ class CssMinifier
         // Filters
         foreach ($filters as $name => $config) {
             if ($config !== false) {
-                $class = "Css".$name."MinifierFilter";
+                $class = '\\'.__NAMESPACE__."\Css".$name."MinifierFilter";
                 $config = is_array($config) ? $config : array();
                 if (class_exists($class)) {
                     $this->filters[] = new $class($this, $config);
@@ -86,7 +86,7 @@ class CssMinifier
         // Plugins
         foreach ($plugins as $name => $config) {
             if ($config !== false) {
-                $class = "Css".$name."MinifierPlugin";
+                $class = '\\'.__NAMESPACE__."\Css".$name."MinifierPlugin";
                 $config = is_array($config) ? $config : array();
                 if (class_exists($class)) {
                     $this->plugins[] = new $class($this, $config);
