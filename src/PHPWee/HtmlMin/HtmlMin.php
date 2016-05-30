@@ -110,7 +110,7 @@ class HtmlMin
                     $attributes[$attr->nodeName] = $attr->nodeValue;
                 }
 
-                if (isset($attributes['type']) && (strtolower($d['type']) !== 'text/javascript')) {
+                if (isset($attributes['type']) && (strtolower($attributes['type']) !== 'text/javascript')) {
                     continue;
                 }
 
