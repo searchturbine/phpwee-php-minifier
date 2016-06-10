@@ -47,10 +47,11 @@ use PHPWee\JsMin\JsMin;
  */
 class HtmlMin
 {
-    public static function minify($html, $js = true, $css = true)
+    public static function minify($html, $js = true, $css = true, $encoding = 'UTF-8')
     {
-        $doc = new \DOMDocument();
+        $doc = new \DOMDocument('1.0', $encoding);
         $doc->preserveWhiteSpace = false;
+        $doc->encoding = $encoding;
         @$doc->loadHTML($html);
         $xpath = new \DOMXPath($doc);
         foreach ($xpath->query('//comment()') as $comment) {
