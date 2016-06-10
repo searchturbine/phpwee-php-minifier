@@ -21,7 +21,7 @@
 	],
 	"autoload": {
 		"psr-4": {
-		  "PHPWee\\": "src/"
+		  "PHPWee\\": "src/PHPWee"
 		}
     },
     "require": {
