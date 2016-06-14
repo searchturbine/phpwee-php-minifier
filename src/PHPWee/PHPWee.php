@@ -11,9 +11,9 @@ class PHPWee
      * @param $html
      * @return string
      */
-    public static function html($html)
+    public static function html($html, $css = true, $js = true, $encoding = 'UTF-8')
     {
-        return HtmlMin\HtmlMin::minify($html);
+        return HtmlMin\HtmlMin::minify($html, $css, $js, $encoding);
     }
 
     /**
