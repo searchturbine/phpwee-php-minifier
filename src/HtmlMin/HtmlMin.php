@@ -9,7 +9,7 @@ PHPWee PHP Minifier Package - http://searchturbine.com/php/phpwee
 Copyright (c) 2015, SearchTurbine - Enterprise Search for Everyone
 http://searchturbine.com/
 
-All rights reserved. 
+All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
@@ -39,7 +39,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	// -- Usage:  echo PHPWee\Minify::html($myhtml);
 	// -- notes:  aply data-no-min to a style or script node to exempt it
 	// -- HTML 4, XHTML, and HTML 5 compliant
-	
+
 	class HtmlMin{
 			// -- Function Name : minify - Params : $html, $js = true, $css = true
 		public static function minify($html, $js = true, $css = true){
@@ -49,7 +49,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 			$xpath = new \DOMXPath($doc);
 			foreach ($xpath->query('//comment()') as $comment) {
 				$val= $comment->nodeValue;
-				if( strpos($val,'[')!==0){
+				if( strpos($val,'[')===false){
 					$comment->parentNode->removeChild($comment);
 				}
 			}
@@ -85,7 +85,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 						continue;
 					}
 					if($c->nodeType==3){
-						$c->nodeValue = trim($c->nodeValue);
+						$c->nodeValue = preg_replace('/\s{2,}/im', '', $c->nodeValue);
 					}
 				}
 			}
