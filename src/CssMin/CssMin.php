@@ -442,7 +442,7 @@ class CssWhitesmithsFormatter extends aCssFormatter
 			$token		= $this->tokens[$i];
 			$class		= get_class($token);
 			$indent 	= str_repeat($this->indent, $level);
-			if ($class === "CssCommentToken")
+			if ($class === "PHPWee\\CssCommentToken")
 				{
 				$lines = array_map("trim", explode("\n", $token->Comment));
 				for ($ii = 0, $ll = count($lines); $ii < $ll; $ii++)
@@ -450,55 +450,55 @@ class CssWhitesmithsFormatter extends aCssFormatter
 					$r[] = $indent . (substr($lines[$ii], 0, 1) == "*" ? " " : "") . $lines[$ii];
 					}
 				}
-			elseif ($class === "CssAtCharsetToken")
+			elseif ($class === "PHPWee\\CssAtCharsetToken")
 				{
 				$r[] = $indent . "@charset " . $token->Charset . ";";
 				}
-			elseif ($class === "CssAtFontFaceStartToken")
+			elseif ($class === "PHPWee\\CssAtFontFaceStartToken")
 				{
 				$r[] = $indent . "@font-face";
 				$r[] = $this->indent . $indent . "{";
 				$level++;
 				}
-			elseif ($class === "CssAtImportToken")
+			elseif ($class === "PHPWee\\CssAtImportToken")
 				{
 				$r[] = $indent . "@import " . $token->Import . " " . implode(", ", $token->MediaTypes) . ";";
 				}
-			elseif ($class === "CssAtKeyframesStartToken")
+			elseif ($class === "PHPWee\\CssAtKeyframesStartToken")
 				{
 				$r[] = $indent . "@keyframes \"" . $token->Name . "\"";
 				$r[] = $this->indent . $indent . "{";
 				$level++;
 				}
-			elseif ($class === "CssAtMediaStartToken")
+			elseif ($class === "PHPWee\\CssAtMediaStartToken")
 				{
 				$r[] = $indent . "@media " . implode(", ", $token->MediaTypes);
 				$r[] = $this->indent . $indent . "{";
 				$level++;
 				}
-			elseif ($class === "CssAtPageStartToken")
+			elseif ($class === "PHPWee\\CssAtPageStartToken")
 				{
 				$r[] = $indent . "@page";
 				$r[] = $this->indent . $indent . "{";
 				$level++;
 				}
-			elseif ($class === "CssAtVariablesStartToken")
+			elseif ($class === "PHPWee\\CssAtVariablesStartToken")
 				{
 				$r[] = $indent . "@variables " . implode(", ", $token->MediaTypes);
 				$r[] = $this->indent . $indent . "{";
 				$level++;
 				}
-			elseif ($class === "CssRulesetStartToken" || $class === "CssAtKeyframesRulesetStartToken")
+			elseif ($class === "PHPWee\\CssRulesetStartToken" || $class === "PHPWee\\CssAtKeyframesRulesetStartToken")
 				{
 				$r[] = $indent . implode(", ", $token->Selectors);
 				$r[] = $this->indent . $indent . "{";
 				$level++;
 				}
-			elseif ($class == "CssAtFontFaceDeclarationToken"
-				|| $class === "CssAtKeyframesRulesetDeclarationToken"
-				|| $class === "CssAtPageDeclarationToken"
-				|| $class == "CssAtVariablesDeclarationToken"
-				|| $class === "CssRulesetDeclarationToken"
+			elseif ($class == "PHPWee\\CssAtFontFaceDeclarationToken"
+				|| $class === "PHPWee\\CssAtKeyframesRulesetDeclarationToken"
+				|| $class === "PHPWee\\CssAtPageDeclarationToken"
+				|| $class == "PHPWee\\CssAtVariablesDeclarationToken"
+				|| $class === "PHPWee\\CssRulesetDeclarationToken"
 				)
 				{
 				$declaration = $indent . $token->Property . ": ";
@@ -508,13 +508,13 @@ class CssWhitesmithsFormatter extends aCssFormatter
 					}
 				$r[] = $declaration . $token->Value . ($token->IsImportant ? " !important" : "") . ";";
 				}
-			elseif ($class === "CssAtFontFaceEndToken"
-				|| $class === "CssAtMediaEndToken"
-				|| $class === "CssAtKeyframesEndToken"
-				|| $class === "CssAtKeyframesRulesetEndToken"
-				|| $class === "CssAtPageEndToken"
-				|| $class === "CssAtVariablesEndToken"
-				|| $class === "CssRulesetEndToken"
+			elseif ($class === "PHPWee\\CssAtFontFaceEndToken"
+				|| $class === "PHPWee\\CssAtMediaEndToken"
+				|| $class === "PHPWee\\CssAtKeyframesEndToken"
+				|| $class === "PHPWee\\CssAtKeyframesRulesetEndToken"
+				|| $class === "PHPWee\\CssAtPageEndToken"
+				|| $class === "PHPWee\\CssAtVariablesEndToken"
+				|| $class === "PHPWee\\CssRulesetEndToken"
 				)
 				{
 				$r[] = $indent . "}";
@@ -665,7 +665,7 @@ class CssVariablesMinifierFilter extends aCssMinifierFilter
 		for($i = 0, $l = count($tokens); $i < $l; $i++)
 			{
 			// @variables at-rule block found
-			if (get_class($tokens[$i]) === "CssAtVariablesStartToken")
+			if (get_class($tokens[$i]) === "PHPWee\\CssAtVariablesStartToken")
 				{
 				$remove[] = $i;
 				$mediaTypes = (count($tokens[$i]->MediaTypes) == 0 ? $defaultMediaTypes : $tokens[$i]->MediaTypes);
@@ -680,7 +680,7 @@ class CssVariablesMinifierFilter extends aCssMinifierFilter
 				for($i = $i; $i < $l; $i++)
 					{
 					// Found a variable declaration => read the variable values
-					if (get_class($tokens[$i]) === "CssAtVariablesDeclarationToken")
+					if (get_class($tokens[$i]) === "PHPWee\\CssAtVariablesDeclarationToken")
 						{
 						foreach ($mediaTypes as $mediaType)
 							{
@@ -689,7 +689,7 @@ class CssVariablesMinifierFilter extends aCssMinifierFilter
 						$remove[] = $i;
 						}
 					// Found the variables end token => break;
-					elseif (get_class($tokens[$i]) === "CssAtVariablesEndToken")
+					elseif (get_class($tokens[$i]) === "PHPWee\\CssAtVariablesEndToken")
 						{
 						$remove[] = $i;
 						break;
@@ -931,12 +931,12 @@ class CssSortRulesetPropertiesMinifierFilter extends aCssMinifierFilter
 		for ($i = 0, $l = count($tokens); $i < $l; $i++)
 			{
 			// Only look for ruleset start rules
-			if (get_class($tokens[$i]) !== "CssRulesetStartToken") { continue; }
+			if (get_class($tokens[$i]) !== "PHPWee\\CssRulesetStartToken") { continue; }
 			// Look for the corresponding ruleset end
 			$endIndex = false;
 			for ($ii = $i + 1; $ii < $l; $ii++)
 				{
-				if (get_class($tokens[$ii]) !== "CssRulesetEndToken") { continue; }
+				if (get_class($tokens[$ii]) !== "PHPWee\\CssRulesetEndToken") { continue; }
 				$endIndex = $ii;
 				break;
 				}
@@ -948,7 +948,7 @@ class CssSortRulesetPropertiesMinifierFilter extends aCssMinifierFilter
 			// Ensure that everything between the start and end is a declaration token, for safety
 			for ($ii = $startIndex + 1; $ii < $endIndex; $ii++)
 				{
-				if (get_class($tokens[$ii]) !== "CssRulesetDeclarationToken") { continue(2); }
+				if (get_class($tokens[$ii]) !== "PHPWee\\CssRulesetDeclarationToken") { continue(2); }
 				}
 			$declarations = array_slice($tokens, $startIndex + 1, $endIndex - $startIndex - 1);
 			// Check whether a sort is required
@@ -1241,9 +1241,9 @@ class CssRemoveLastDelarationSemiColonMinifierFilter extends aCssMinifierFilter
 			{
 			$current	= get_class($tokens[$i]);
 			$next		= isset($tokens[$i+1]) ? get_class($tokens[$i+1]) : false;
-			if (($current === "CssRulesetDeclarationToken" && $next === "CssRulesetEndToken") ||
-				($current === "CssAtFontFaceDeclarationToken" && $next === "CssAtFontFaceEndToken") || 
-				($current === "CssAtPageDeclarationToken" && $next === "CssAtPageEndToken"))
+			if (($current === "PHPWee\\CssRulesetDeclarationToken" && $next === "PHPWee\\CssRulesetEndToken") ||
+				($current === "PHPWee\\CssAtFontFaceDeclarationToken" && $next === "PHPWee\\CssAtFontFaceEndToken") || 
+				($current === "PHPWee\\CssAtPageDeclarationToken" && $next === "PHPWee\\CssAtPageEndToken"))
 				{
 				$tokens[$i]->IsLast = true;
 				}
@@ -1278,8 +1278,8 @@ class CssRemoveEmptyRulesetsMinifierFilter extends aCssMinifierFilter
 			{
 			$current	= get_class($tokens[$i]);
 			$next		= isset($tokens[$i + 1]) ? get_class($tokens[$i + 1]) : false;
-			if (($current === "CssRulesetStartToken" && $next === "CssRulesetEndToken") ||
-				($current === "CssAtKeyframesRulesetStartToken" && $next === "CssAtKeyframesRulesetEndToken" && !array_intersect(array("from", "0%", "to", "100%"), array_map("strtolower", $tokens[$i]->Selectors)))
+			if (($current === "PHPWee\\CssRulesetStartToken" && $next === "PHPWee\\CssRulesetEndToken") ||
+				($current === "PHPWee\\CssAtKeyframesRulesetStartToken" && $next === "PHPWee\\CssAtKeyframesRulesetEndToken" && !array_intersect(array("from", "0%", "to", "100%"), array_map("strtolower", $tokens[$i]->Selectors)))
 				)
 				{
 				$tokens[$i]		= null;
@@ -1318,10 +1318,10 @@ class CssRemoveEmptyAtBlocksMinifierFilter extends aCssMinifierFilter
 			{
 			$current	= get_class($tokens[$i]);
 			$next		= isset($tokens[$i + 1]) ? get_class($tokens[$i + 1]) : false;
-			if (($current === "CssAtFontFaceStartToken" && $next === "CssAtFontFaceEndToken") ||
-				($current === "CssAtKeyframesStartToken" && $next === "CssAtKeyframesEndToken") ||
-				($current === "CssAtPageStartToken" && $next === "CssAtPageEndToken") ||
-				($current === "CssAtMediaStartToken" && $next === "CssAtMediaEndToken"))
+			if (($current === "PHPWee\\CssAtFontFaceStartToken" && $next === "PHPWee\\CssAtFontFaceEndToken") ||
+				($current === "PHPWee\\CssAtKeyframesStartToken" && $next === "PHPWee\\CssAtKeyframesEndToken") ||
+				($current === "PHPWee\\CssAtPageStartToken" && $next === "PHPWee\\CssAtPageEndToken") ||
+				($current === "PHPWee\\CssAtMediaStartToken" && $next === "PHPWee\\CssAtMediaEndToken"))
 				{
 				$tokens[$i]		= null;
 				$tokens[$i + 1]	= null;
@@ -1356,7 +1356,7 @@ class CssRemoveCommentsMinifierFilter extends aCssMinifierFilter
 		$r = 0;
 		for ($i = 0, $l = count($tokens); $i < $l; $i++)
 			{
-			if (get_class($tokens[$i]) === "CssCommentToken")
+			if (get_class($tokens[$i]) === "PHPWee\\CssCommentToken")
 				{
 				$tokens[$i] = null;
 				$r++;
@@ -1457,7 +1457,7 @@ class CssParser
 			{
 			if ($config !== false)
 				{
-				$class	= "Css" . $name . "ParserPlugin";
+				$class	= "PHPWee\\Css" . $name . "ParserPlugin";
 				$config = is_array($config) ? $config : array();
 				if (class_exists($class))
 					{
@@ -1818,7 +1818,7 @@ class CssOtbsFormatter extends aCssFormatter
 			$token		= $this->tokens[$i];
 			$class		= get_class($token);
 			$indent 	= str_repeat($this->indent, $level);
-			if ($class === "CssCommentToken")
+			if ($class === "PHPWee\\CssCommentToken")
 				{
 				$lines = array_map("trim", explode("\n", $token->Comment));
 				for ($ii = 0, $ll = count($lines); $ii < $ll; $ii++)
@@ -1826,49 +1826,49 @@ class CssOtbsFormatter extends aCssFormatter
 					$r[] = $indent . (substr($lines[$ii], 0, 1) == "*" ? " " : "") . $lines[$ii];
 					}
 				}
-			elseif ($class === "CssAtCharsetToken")
+			elseif ($class === "PHPWee\\CssAtCharsetToken")
 				{
 				$r[] = $indent . "@charset " . $token->Charset . ";";
 				}
-			elseif ($class === "CssAtFontFaceStartToken")
+			elseif ($class === "PHPWee\\CssAtFontFaceStartToken")
 				{
 				$r[] = $indent . "@font-face {";
 				$level++;
 				}
-			elseif ($class === "CssAtImportToken")
+			elseif ($class === "PHPWee\\CssAtImportToken")
 				{
 				$r[] = $indent . "@import " . $token->Import . " " . implode(", ", $token->MediaTypes) . ";";
 				}
-			elseif ($class === "CssAtKeyframesStartToken")
+			elseif ($class === "PHPWee\\CssAtKeyframesStartToken")
 				{
 				$r[] = $indent . "@keyframes \"" . $token->Name . "\" {";
 				$level++;
 				}
-			elseif ($class === "CssAtMediaStartToken")
+			elseif ($class === "PHPWee\\CssAtMediaStartToken")
 				{
 				$r[] = $indent . "@media " . implode(", ", $token->MediaTypes) . " {";
 				$level++;
 				}
-			elseif ($class === "CssAtPageStartToken")
+			elseif ($class === "PHPWee\\CssAtPageStartToken")
 				{
 				$r[] = $indent . "@page {";
 				$level++;
 				}
-			elseif ($class === "CssAtVariablesStartToken")
+			elseif ($class === "PHPWee\\CssAtVariablesStartToken")
 				{
 				$r[] = $indent . "@variables " . implode(", ", $token->MediaTypes) . " {";
 				$level++;
 				}
-			elseif ($class === "CssRulesetStartToken" || $class === "CssAtKeyframesRulesetStartToken")
+			elseif ($class === "PHPWee\\CssRulesetStartToken" || $class === "PHPWee\\CssAtKeyframesRulesetStartToken")
 				{
 				$r[] = $indent . implode(", ", $token->Selectors) . " {";
 				$level++;
 				}
-			elseif ($class == "CssAtFontFaceDeclarationToken"
-				|| $class === "CssAtKeyframesRulesetDeclarationToken"
-				|| $class === "CssAtPageDeclarationToken"
-				|| $class == "CssAtVariablesDeclarationToken"
-				|| $class === "CssRulesetDeclarationToken"
+			elseif ($class == "PHPWee\\CssAtFontFaceDeclarationToken"
+				|| $class === "PHPWee\\CssAtKeyframesRulesetDeclarationToken"
+				|| $class === "PHPWee\\CssAtPageDeclarationToken"
+				|| $class == "PHPWee\\CssAtVariablesDeclarationToken"
+				|| $class === "PHPWee\\CssRulesetDeclarationToken"
 				)
 				{
 				$declaration = $indent . $token->Property . ": ";
@@ -1878,13 +1878,13 @@ class CssOtbsFormatter extends aCssFormatter
 					}
 				$r[] = $declaration . $token->Value . ($token->IsImportant ? " !important" : "") . ";";
 				}
-			elseif ($class === "CssAtFontFaceEndToken"
-				|| $class === "CssAtMediaEndToken"
-				|| $class === "CssAtKeyframesEndToken"
-				|| $class === "CssAtKeyframesRulesetEndToken"
-				|| $class === "CssAtPageEndToken"
-				|| $class === "CssAtVariablesEndToken"
-				|| $class === "CssRulesetEndToken"
+			elseif ($class === "PHPWee\\CssAtFontFaceEndToken"
+				|| $class === "PHPWee\\CssAtMediaEndToken"
+				|| $class === "PHPWee\\CssAtKeyframesEndToken"
+				|| $class === "PHPWee\\CssAtKeyframesRulesetEndToken"
+				|| $class === "PHPWee\\CssAtPageEndToken"
+				|| $class === "PHPWee\\CssAtVariablesEndToken"
+				|| $class === "PHPWee\\CssRulesetEndToken"
 				)
 				{
 				$level--;
@@ -1987,7 +1987,7 @@ class CssMinifier
 			{
 			if ($config !== false)
 				{
-				$class	= "Css" . $name . "MinifierFilter";
+				$class	= "PHPWee\\Css" . $name . "MinifierFilter";
 				$config = is_array($config) ? $config : array();
 				if (class_exists($class))
 					{
@@ -2004,7 +2004,7 @@ class CssMinifier
 			{
 			if ($config !== false)
 				{
-				$class	= "Css" . $name . "MinifierPlugin";
+				$class	= "PHPWee\\Css" . $name . "MinifierPlugin";
 				$config = is_array($config) ? $config : array();
 				if (class_exists($class))
 					{
@@ -2349,7 +2349,7 @@ class CssImportImportsMinifierFilter extends aCssMinifierFilter
 			}
 		for ($i = 0, $l = count($tokens); $i < $l; $i++)
 			{
-			if (get_class($tokens[$i]) === "CssAtImportToken")
+			if (get_class($tokens[$i]) === "PHPWee\\CssAtImportToken")
 				{
 				$import = $this->configuration["BasePath"] . "/" . $tokens[$i]->Import;
 				// Import file was not found/is not a file
@@ -2377,7 +2377,7 @@ class CssImportImportsMinifierFilter extends aCssMinifierFilter
 						 */
 						for($ii = 0, $ll = count($import); $ii < $ll; $ii++)
 							{
-							if (get_class($import[$ii]) === "CssAtImportToken")
+							if (get_class($import[$ii]) === "PHPWee\\CssAtImportToken")
 								{
 								// @import at-rule defines no media type or only the "all" media type; set the media types to the one defined in the parent @import at-rule
 								if (count($import[$ii]->MediaTypes) == 0 || (count($import[$ii]->MediaTypes) == 1 && $import[$ii]->MediaTypes[0] == "all"))
@@ -2408,7 +2408,7 @@ class CssImportImportsMinifierFilter extends aCssMinifierFilter
 						 */
 						for($ii = 0, $ll = count($import); $ii < $ll; $ii++)
 							{
-							if (get_class($import[$ii]) === "CssAtMediaStartToken")
+							if (get_class($import[$ii]) === "PHPWee\\CssAtMediaStartToken")
 								{
 								foreach ($import[$ii]->MediaTypes as $index => $mediaType)
 									{
@@ -2425,18 +2425,18 @@ class CssImportImportsMinifierFilter extends aCssMinifierFilter
 						 */
 						for($ii = 0, $ll = count($import); $ii < $ll; $ii++)
 							{
-							if (get_class($import[$ii]) === "CssAtMediaStartToken")
+							if (get_class($import[$ii]) === "PHPWee\\CssAtMediaStartToken")
 								{
 								if (count($import[$ii]->MediaTypes) === 0)
 									{
 									for ($iii = $ii; $iii < $ll; $iii++)
 										{
-										if (get_class($import[$iii]) === "CssAtMediaEndToken")
+										if (get_class($import[$iii]) === "PHPWee\\CssAtMediaEndToken")
 											{
 											break;
 											}
 										}
-									if (get_class($import[$iii]) === "CssAtMediaEndToken")
+									if (get_class($import[$iii]) === "PHPWee\\CssAtMediaEndToken")
 										{
 										array_splice($import, $ii, $iii - $ii + 1, array());
 										$ll = count($import);
@@ -2450,16 +2450,16 @@ class CssImportImportsMinifierFilter extends aCssMinifierFilter
 						 */ 
 						for($ii = 0, $ll = count($import); $ii < $ll; $ii++)
 							{
-							if (get_class($import[$ii]) === "CssAtMediaStartToken" && count(array_diff($tokens[$i]->MediaTypes, $import[$ii]->MediaTypes)) === 0)
+							if (get_class($import[$ii]) === "PHPWee\\CssAtMediaStartToken" && count(array_diff($tokens[$i]->MediaTypes, $import[$ii]->MediaTypes)) === 0)
 								{
 								for ($iii = $ii; $iii < $ll; $iii++)
 									{
-									if (get_class($import[$iii]) == "CssAtMediaEndToken")
+									if (get_class($import[$iii]) == "PHPWee\\CssAtMediaEndToken")
 										{
 										break;
 										}
 									}
-								if (get_class($import[$iii]) == "CssAtMediaEndToken")
+								if (get_class($import[$iii]) == "PHPWee\\CssAtMediaEndToken")
 									{
 									unset($import[$ii]);
 									unset($import[$iii]);
@@ -2474,7 +2474,7 @@ class CssImportImportsMinifierFilter extends aCssMinifierFilter
 						for($ii = 0, $ll = count($import); $ii < $ll; $ii++)
 							{
 							$class = get_class($import[$ii]);
-							if ($class === "CssAtImportToken" || $class === "CssAtCharsetToken")
+							if ($class === "PHPWee\\CssAtImportToken" || $class === "PHPWee\\CssAtCharsetToken")
 								{
 								$blocks = array_merge($blocks, array_splice($import, $ii, 1, array()));
 								$ll = count($import);
@@ -2486,18 +2486,18 @@ class CssImportImportsMinifierFilter extends aCssMinifierFilter
 						for($ii = 0, $ll = count($import); $ii < $ll; $ii++)
 							{
 							$class = get_class($import[$ii]);
-							if ($class === "CssAtFontFaceStartToken" || $class === "CssAtMediaStartToken" || $class === "CssAtPageStartToken" || $class === "CssAtVariablesStartToken")
+							if ($class === "PHPWee\\CssAtFontFaceStartToken" || $class === "PHPWee\\CssAtMediaStartToken" || $class === "PHPWee\\CssAtPageStartToken" || $class === "PHPWee\\CssAtVariablesStartToken")
 								{
 								for ($iii = $ii; $iii < $ll; $iii++)
 									{
 									$class = get_class($import[$iii]);
-									if ($class === "CssAtFontFaceEndToken" || $class === "CssAtMediaEndToken" || $class === "CssAtPageEndToken" || $class === "CssAtVariablesEndToken")
+									if ($class === "PHPWee\\CssAtFontFaceEndToken" || $class === "PHPWee\\CssAtMediaEndToken" || $class === "PHPWee\\CssAtPageEndToken" || $class === "PHPWee\\CssAtVariablesEndToken")
 										{
 										break;
 										}
 									}
 								$class = get_class($import[$iii]);
-								if (isset($import[$iii]) && ($class === "CssAtFontFaceEndToken" || $class === "CssAtMediaEndToken" || $class === "CssAtPageEndToken" || $class === "CssAtVariablesEndToken"))
+								if (isset($import[$iii]) && ($class === "PHPWee\\CssAtFontFaceEndToken" || $class === "PHPWee\\CssAtMediaEndToken" || $class === "PHPWee\\CssAtPageEndToken" || $class === "PHPWee\\CssAtVariablesEndToken"))
 									{
 									$blocks = array_merge($blocks, array_splice($import, $ii, $iii - $ii + 1, array()));
 									$ll = count($import);
@@ -3201,7 +3201,7 @@ class CssConvertLevel3PropertiesMinifierFilter extends aCssMinifierFilter
 		$transformations = &$this->transformations;
 		for ($i = 0, $l = count($tokens); $i < $l; $i++)
 			{
-			if (get_class($tokens[$i]) === "CssRulesetDeclarationToken")
+			if (get_class($tokens[$i]) === "PHPWee\\CssRulesetDeclarationToken")
 				{
 				$tProperty = $tokens[$i]->Property;
 				if (isset($transformations[$tProperty]))
@@ -3329,16 +3329,16 @@ class CssConvertLevel3AtKeyframesMinifierFilter extends aCssMinifierFilter
 		$transformations = array("-moz-keyframes", "-webkit-keyframes");
 		for ($i = 0, $l = count($tokens); $i < $l; $i++)
 			{
-			if (get_class($tokens[$i]) === "CssAtKeyframesStartToken")
+			if (get_class($tokens[$i]) === "PHPWee\\CssAtKeyframesStartToken")
 				{
 				for ($ii = $i; $ii < $l; $ii++)
 					{
-					if (get_class($tokens[$ii]) === "CssAtKeyframesEndToken")
+					if (get_class($tokens[$ii]) === "PHPWee\\CssAtKeyframesEndToken")
 						{
 						break;
 						}
 					}
-				if (get_class($tokens[$ii]) === "CssAtKeyframesEndToken")
+				if (get_class($tokens[$ii]) === "PHPWee\\CssAtKeyframesEndToken")
 					{
 					$add	= array();
 					$source	= array();
@@ -3704,7 +3704,7 @@ class CssCompressExpressionValuesMinifierPlugin extends aCssMinifierPlugin
 	 */
 	public function apply(aCssToken &$token)
 		{
-		if (class_exists("JSMin") && stripos($token->Value, "expression(") !== false)
+		if (class_exists("PHPWee\\JSMin") && stripos($token->Value, "expression(") !== false)
 			{
 			$value	= $token->Value;
 			$value	= substr($token->Value, stripos($token->Value, "expression(") + 10);
