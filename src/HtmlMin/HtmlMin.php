@@ -85,7 +85,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 						continue;
 					}
 					if($c->nodeType==3){
-						$c->nodeValue = trim($c->nodeValue);
+						//$c->nodeValue = trim($c->nodeValue);
 					}
 				}
 			}
